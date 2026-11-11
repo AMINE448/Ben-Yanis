@@ -24,6 +24,26 @@ description: Recherche sur Internet approfondie, fiable et sourcée. À utiliser
 - Filtrer par domaine quand c'est utile (`allowed_domains`) : site officiel, `github.com` pour un logiciel, `gouv.fr` pour une démarche, `legifrance.gouv.fr` pour le droit.
 - Si rien de bon ne sort : changer de mots-clés plutôt que répéter la même recherche.
 
+## 2 bis. Outils à utiliser (connecteurs de l'utilisateur)
+L'utilisateur a connecté ces connecteurs à son compte : les utiliser **en priorité** quand ils sont disponibles.
+
+| Besoin | Outil | Coût |
+|---|---|---|
+| Recherche Web, Reddit, forums publics | **Parallel Search** `web_search` (plusieurs requêtes dans un seul appel, `site:reddit.com`, `site:forums.macrumors.com`…) | Gratuit |
+| Lire une page précise | **Parallel** `web_fetch`, sinon **TinyFish** `fetch_content` (navigateur réel, pages JavaScript) | Gratuit / ~0,001 $ |
+| Réseaux sociaux publics (Facebook, Instagram, X, LinkedIn, TikTok) | **TinyFish** `fetch_content` sur l'URL du profil ou de la publication | ~0,001 $ |
+| Recherche complémentaire, actualités récentes | **TinyFish** `search` (`domain_type: news`, `recency_minutes`, `include_domains`) | ~0,005 $ |
+| Site bloqué par une fenêtre de cookies ou un « Voir plus » (ex. jeuxvideo.com) | **TinyFish** `run_web_automation` | 0,016 $ par étape : **annoncer le coût estimé et demander l'accord avant** |
+| Recherche approfondie TinyFish (Deep / Max) | `start_deep_research` | 2 à 3 $ : **jamais sans accord explicite** |
+
+Réflexe pour une recherche « partout » :
+1. Parallel `web_search` en parallèle : Web général + `site:reddit.com` + forums du domaine (FR : jeuxvideo.com, forum.hardware.fr, commentcamarche.net, forum.doctissimo.fr, 60millions-mag.com ; EN : forums spécialisés).
+2. Réseaux sociaux : chercher les URL publiques (`site:facebook.com`, `site:instagram.com`, `site:x.com`, `site:linkedin.com`, `site:tiktok.com`), puis les lire avec TinyFish `fetch_content`.
+3. Ce qui reste bloqué : le dire clairement, proposer `run_web_automation` avec son coût.
+4. Vérifier le solde TinyFish (`get_wallet`) avant une série d'actions payantes.
+
+Limites à rappeler : comptes privés, groupes fermés, stories et messages privés restent inaccessibles ; Instagram et X masquent souvent les publications sans connexion. Ne jamais se connecter à un compte de l'utilisateur sans sa demande explicite. Si la recherche vise un particulier, rester sur des informations publiques, pertinentes pour le dossier, et rappeler le cadre du RGPD.
+
 ## 3. Lire les vraies pages
 - Ouvrir les 2 à 4 meilleures pages (WebFetch) au lieu de se fier aux extraits des résultats.
 - Pour un fichier ou un dépôt de code, lire le fichier d'origine (ex. `raw.githubusercontent.com`) plutôt qu'un résumé.
